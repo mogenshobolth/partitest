@@ -25,11 +25,11 @@ def home():
         if rowno == 0:
             navid_prev = navid
         else:
-            navid_prev = df[df["raekkenr"] == rowno-1].iloc[0].id #fix edge case (first row)
+            navid_prev = df[df["raekkenr"] == rowno-1].iloc[0].id
         if rowno+1 == len(df.index):
             navid_next = navid
         else:
-            navid_next = df[df["raekkenr"] == rowno+1].iloc[0].id #fix edge case (last row)
+            navid_next = df[df["raekkenr"] == rowno+1].iloc[0].id
     else:
         id = str(df.iloc[0].id)
         navid = int(id)
