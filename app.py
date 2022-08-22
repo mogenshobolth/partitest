@@ -35,10 +35,12 @@ def home():
         navid = int(id)
         navid_prev = navid
         navid_next = df.iloc[1].id
+    progress_bar = int(rowno/no_votes * 100)
+    if navid == int(id) and rowno > 0:
+        progress_bar = 100
     votes[id] = vote
     session['votes'] = votes
     id = navid
-    progress_bar = int(rowno/no_votes * 100)
     if str(navid) in votes:
         vote = votes[str(navid)]
     else:
