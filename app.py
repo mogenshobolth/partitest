@@ -56,6 +56,7 @@ def home():
     similarity_V = calculateSimilarity(votes, df, 'V')
     similarity_KF = calculateSimilarity(votes, df, 'KF')
     similarity_DF = calculateSimilarity(votes, df, 'DF')
+    similarity_NB = calculateSimilarity(votes, df, 'NB')
     return render_template(
         "partitest.html",
         vote=vote,
@@ -68,8 +69,8 @@ def home():
         date=datetime.now(),
         progress_bar=progress_bar,
         test_completed = test_completed,
-        partier = ['ALT','EL', 'SF', 'RV', 'S', 'V', 'KF','DF'],
-        partienighed = [similarity_ALT, similarity_EL, similarity_SF, similarity_RV, similarity_S, similarity_V, similarity_KF, similarity_DF]
+        partier = ['ALT','EL', 'SF', 'RV', 'S', 'V', 'KF','DF','NB'],
+        partienighed = [similarity_ALT, similarity_EL, similarity_SF, similarity_RV, similarity_S, similarity_V, similarity_KF, similarity_DF, similarity_NB]
     )
 
 def calculateSimilarity(votes, df, party):
