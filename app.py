@@ -16,6 +16,7 @@ def home():
     votes = {}
     rowno = 0
     no_votes = len(df.index)
+    test_completed = False
     if request.method == 'POST':
         votes = session['votes']
         id = str(request.form['id'])
@@ -38,6 +39,7 @@ def home():
     progress_bar = int(rowno/no_votes * 100)
     if navid == int(id) and rowno > 0:
         progress_bar = 100
+        test_completed = True
     votes[id] = vote
     session['votes'] = votes
     id = navid
@@ -65,6 +67,7 @@ def home():
         navid_next = navid_next,
         date=datetime.now(),
         progress_bar=progress_bar,
+        test_completed = test_completed,
         partier = ['ALT','EL', 'SF', 'RV', 'S', 'V', 'KF','DF'],
         partienighed = [similarity_ALT, similarity_EL, similarity_SF, similarity_RV, similarity_S, similarity_V, similarity_KF, similarity_DF]
     )

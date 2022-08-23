@@ -8,7 +8,7 @@
     </head>
     <body>
 
-        <form method="post">
+        <form method="post" id="form_questions">
 
         <div class="container-fluid pt-1">
             <div class="row pt-1">
@@ -21,9 +21,9 @@
                         Start forfra
                       </a>
                     <p>&nbsp;</p>
-                    <button type="submit" name="navid" value="{{navid_prev}}" class="btn btn-primary">Forrige forslag</button>
+                    <button type="submit" name="navid" id="nav_prev" value="{{navid_prev}}" class="btn btn-primary">Forrige forslag</button>
                     <p>&nbsp;</p>
-                    <button type="submit" name="navid" value="{{navid_next}}" class="btn btn-primary">Næste forslag</button>                    
+                    <button type="submit" name="navid" id="nav_next" value="{{navid_next}}" class="btn btn-primary">Næste forslag</button>                    
     
                 </div>
             </div>
@@ -34,6 +34,17 @@
                       </div>                    
                 </div>
             </div>
+
+            {% if test_completed  %}
+
+            <div class="row pt-2">
+                <div class="col d-flex justify-content-center">
+                    <h2>Du er kommet igennem testen! Her er resultatet:</h2>
+                </div>
+            </div>
+
+            {% else %}
+
             <div class="row pt-2">
                 <div class="col d-flex justify-content-center">
                     <h2>{{ministeromraade}}</h2>
@@ -49,9 +60,7 @@
             <div class="row pt-2">
                 <div class="col-3">
                 </div>
-                <div class="col-6 d-flex justify-content-center">
-
-                    <input type="hidden" name="id" value="{{id}}">
+                <div class="col-6 d-flex justify-content-center" id="vote_buttons">
 
                     <input type="radio" class="btn-check" name="vote" value="1" id="option1" autocomplete="off" {% if vote==1 %} checked {% endif %}>
                     <label class="btn btn-outline-success w-25" for="option1">For</label>
@@ -88,6 +97,18 @@
                       </div>
                 </div>
             </div>
+
+            <script>
+const select = document.getElementById('vote_buttons');
+
+select.addEventListener('click', ({ target }) => { 
+    document.getElementById('nav_next').click();
+});
+
+            </script>
+
+            {% endif %}
+
             <div class="row pt-2">
                 <div class="col d-flex justify-content-center">
                     <div style="width:100%;max-width:700px">
@@ -102,10 +123,15 @@
             </div>
         </div>
 
+        <input type="hidden" name="vote" value="4">
+        <input type="hidden" name="id" value="{{id}}">
+        </form>
+
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
         <script>
+
             const labels = ['ALT','EL', 'SF', 'RV', 'S', 'V', 'KF','DF'];
           
             const data = {
